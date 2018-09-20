@@ -17,13 +17,34 @@ const io = require("socket.io")(server);
 var currentConnection = 0;
 var socketList = [];
 
+var values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 io.sockets.on("connection", function(socket) {
     socketList[currentConnection] = socket;
     currentConnection++;
+    socket.emit("up", values);
+    
+    socket.on("reset", function() {
+        for (var i = 0; i < 13; i++) {
+            values[i] = 0;
+        }
+        
+        for (var i = 0; i < socketList.length; i++) {
+            socketList[i].emit("up", values);
+        }
+    });
     
     socket.on("count", function(data) {
+        values[data]++;
         for (var i = 0; i < socketList.length; i++) {
-            socketList[i].emit("up", data);
+            socketList[i].emit("up", values);
+        }
+    });
+    
+    socket.on("uncount", function(data) {
+        values[data]--;
+        for (var i = 0; i < socketList.length; i++) {
+            socketList[i].emit("up", values);
         }
     });
     

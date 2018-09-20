@@ -1,14 +1,25 @@
 const socket = io();
 
 window.onload = function() {
-    $("button").each(function(i, obj) {
+    $("#button_reset").on("click", function() {
+        socket.emit("reset");
+    });
+    
+    $(".button_counter").each(function(i, obj) {
         $("#button" + (i + 1)).on("click", function() {
-            socket.emit("count", i + 1);
+            socket.emit("count", i);
+        });
+    });
+    
+    $(".button_uncounter").each(function(i, obj) {
+        $("#unbutton" + (i + 1)).on("click", function() {
+            socket.emit("uncount", i);
         });
     });
     
     socket.on("up", function(data) {
-        var value = parseInt($("#counter" + data).html());
-        $("#counter" + data).html(value + 1);
+        for (var i = 0; i < 13; i++) {
+            $("#counter" + (i + 1)).html(data[i]);
+        }
     });
 };
