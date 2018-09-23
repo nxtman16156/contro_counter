@@ -17,15 +17,26 @@ const io = require("socket.io")(server);
 var currentConnection = 0;
 var socketList = [];
 
-var values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var classNumber = 1;
 
 io.sockets.on("connection", function(socket) {
     socketList[currentConnection] = socket;
     currentConnection++;
+    
+    socket.emit("changeClass", classNumber);
     socket.emit("up", values);
     
+    socket.on("changeClass", function() {
+        if (classNumber == 1) classNumber = 2;
+        else classNumber = 1;
+        for (var i = 0; i < socketList.length; i++) {
+            socketList[i].emit("changeClass", classNumber);
+        }
+    });
+    
     socket.on("reset", function() {
-        for (var i = 0; i < 13; i++) {
+        for (var i = 0; i < 20; i++) {
             values[i] = 0;
         }
         
