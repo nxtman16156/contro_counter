@@ -45,7 +45,7 @@ window.onload = function() {
     });
     
     socket.on("up", function(data) {
-        for (var i = 0; i < 19; i++) {
+        for (var i = 0; i < 20; i++) {
             $("#counter" + (i + 1)).html(data[i]);
         }
     });

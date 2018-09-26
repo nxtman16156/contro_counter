@@ -17,7 +17,7 @@ const io = require("socket.io")(server);
 var currentConnection = 0;
 var socketList = [];
 
-var values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var classNumber = 1;
 
 io.sockets.on("connection", function(socket) {
@@ -36,7 +36,7 @@ io.sockets.on("connection", function(socket) {
     });
     
     socket.on("reset", function() {
-        for (var i = 0; i < 19; i++) {
+        for (var i = 0; i < 20; i++) {
             values[i] = 0;
         }
         

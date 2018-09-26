@@ -25,3 +25,8 @@ button {
 p {
     margin: 0;
 }
+
+#silence_table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
