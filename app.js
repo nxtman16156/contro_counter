@@ -10,6 +10,10 @@ app.get("/", function(request, response) {
     response.sendFile(__dirname + "/public/index.html");
 });
 
+app.get("/note", function(request, response) {
+    response.sendFile(__dirname + "/public/note.html");
+});
+
 server.listen(port);
 console.log("Server listening on port " + port);
 
