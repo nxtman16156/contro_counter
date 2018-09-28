@@ -54,7 +54,7 @@ window.onload = function() {
         $("#average_count").html(average);
         for (var i = 1; i <= 19; i++) {
             var value = parseInt($("#counter" + i).html());
-            if (value > average + 2 || value < average - 2) {
+            if (value > average + 2 || value < average - 1.5) {
                 $("#counter" + i).css("background-color", "#ef6502");
             } else {
                 $("#counter" + i).css("background-color", "#ffffff");
