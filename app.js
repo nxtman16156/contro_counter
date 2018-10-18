@@ -43,12 +43,16 @@ io.sockets.on("connection", function(socket) {
     });
     
     socket.on("reset", function() {
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < 19; i++) {
             values[i] = 0;
+            times[i] = 0;
+            buttonStates[i] = 0;
         }
         
         for (var i = 0; i < socketList.length; i++) {
             socketList[i].emit("up", values);
+            socketList[i].emit("increment_time", times);
+            socketList[i].emit("set_button_type", buttonStates);
         }
     });
     
