@@ -15,7 +15,10 @@ window.onload = function() {
     
     $(".button_counter").each(function(i, obj) {
         $("#button" + (i + 1)).on("click", function() {
-            socket.emit("count", i);
+            if ($("#button" + (i + 1)).html() == "Start") {
+                socket.emit("count", i);
+            }
+            socket.emit("change_button_type", i);
         });
     });
     
@@ -61,6 +64,25 @@ window.onload = function() {
             }
         }
     });
+    
+    socket.on("set_button_type", function(data) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i]) $("#button" + (i + 1)).html("Stop");
+            else $("#button" + (i + 1)).html("Start");
+        }
+    });
+    
+    socket.on("increment_time", function(data) {
+        for (var i = 0; i < data.length; i++) {
+            var minutes = Math.floor(data[i] / 60);
+            var seconds = data[i] % 60;
+            $("#timer" + (i + 1)).html(minutes + ":" + seconds);
+        }
+        var average = calculateTimeAverage();
+        var minutes2 = Math.floor(average / 60);
+        var seconds2 = average % 60;
+        $("#average_time").html(minutes2 + ":" + seconds2);
+    });
 };
 
 function calculateAverage() {
@@ -72,5 +94,18 @@ function calculateAverage() {
             count++;
         }
     }
-    return (sum / count);
+    return Math.round((sum / count) * 100) / 100;
+}
+
+function calculateTimeAverage() {
+    var sum = 0;
+    var count = 0;
+    for (var i = 1; i <= 19; i++) {
+        if ($("#timer" + i).is(":visible")) {
+            var time = $("#timer" + i).html();
+            sum += (60 * parseInt(time.split(":")[0])) + parseInt(time.split(":")[1]);
+            count++;
+        }
+    }
+    return Math.round(sum / count);
 }

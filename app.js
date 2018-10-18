@@ -22,6 +22,8 @@ var currentConnection = 0;
 var socketList = [];
 
 var values = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var buttonStates = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var times = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var classNumber = 1;
 
 io.sockets.on("connection", function(socket) {
@@ -29,6 +31,7 @@ io.sockets.on("connection", function(socket) {
     currentConnection++;
     
     socket.emit("changeClass", classNumber);
+    socket.emit("set_button_type", buttonStates);
     socket.emit("up", values);
     
     socket.on("changeClass", function() {
@@ -56,6 +59,20 @@ io.sockets.on("connection", function(socket) {
         }
     });
     
+    socket.on("change_button_type", function(data) {
+        buttonStates[data] = !buttonStates[data];
+        
+        if (buttonStates[data]) {
+            for (var i = 0; i < buttonStates.length; i++) {
+                if (i != data) buttonStates[i] = 0;
+            }
+        }
+        
+        for (var i = 0; i < socketList.length; i++) {
+            socketList[i].emit("set_button_type", buttonStates);
+        }
+    });
+    
     socket.on("uncount", function(data) {
         values[data]--;
         for (var i = 0; i < socketList.length; i++) {
@@ -72,3 +89,16 @@ io.sockets.on("connection", function(socket) {
         }
     });
 });
+
+setInterval(incrementTime, 1000);
+
+function incrementTime() {
+    for (var j = 0; j < buttonStates.length; j++) {
+        if (buttonStates[j]) {
+            times[j]++;
+            for (var i = 0; i < socketList.length; i++) {
+                socketList[i].emit("increment_time", times);
+            }
+        }
+    }
+}
