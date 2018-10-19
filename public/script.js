@@ -78,10 +78,22 @@ window.onload = function() {
             var seconds = data[i] % 60;
             $("#timer" + (i + 1)).html(minutes + ":" + seconds);
         }
+        
         var average = calculateTimeAverage();
         var minutes2 = Math.floor(average / 60);
         var seconds2 = average % 60;
         $("#average_time").html(minutes2 + ":" + seconds2);
+        
+        for (var i = 1; i <= 19; i++) {
+            var value = $("#timer" + i).html();
+            value = (60 * parseInt(value.split(':')[0])) + parseInt(value.split(':')[1]);
+            var time = (minutes2 * 60) + seconds2;
+            if (value > time + 60 || value < time - 30) {
+                $("#timer" + i).css("background-color", "#ef6502");
+            } else {
+                $("#timer" + i).css("background-color", "#ffffff");
+            }
+        }
     });
 };
 
