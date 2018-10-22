@@ -15,10 +15,12 @@ window.onload = function() {
     
     $(".button_counter").each(function(i, obj) {
         $("#button" + (i + 1)).on("click", function() {
-            if ($("#button" + (i + 1)).html() == "Start") {
+            var button_html = $("#button" + (i + 1)).html();
+            if (button_html == "Start" || button_html != "Stop") {
                 socket.emit("count", i);
             }
-            socket.emit("change_button_type", i);
+            
+            if (button_html == "Start" || button_html == "Stop") socket.emit("change_button_type", i);
         });
     });
     
