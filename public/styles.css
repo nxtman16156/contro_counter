@@ -6,6 +6,36 @@
     display: inline;
 }
 
+.container {
+    clear: both;
+    width: 100%;
+}
+
+#edit_class1,
+#edit_class2 {
+    width: 50%;
+    height: 90vh;
+    float: left;
+}
+
+#form1,
+#form2 {
+    width: 50%;
+    float: left;;
+}
+
+#input_class1,
+#input_class2 {
+    width: 100%;
+    float: left;
+}
+
+#button_class1,
+#button_class2 {
+    width: 100%;
+    float: left;
+}
+
 #no-bold {
     font-weight: normal;
 }
