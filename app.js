@@ -5,8 +5,19 @@ const server = require("http").Server(app);
 
 var socketList = [];
 
-var class1 = ["Jaewon", "Alice", "Komal", "Chandler", "Eddie", "Alyza", "Jovanna", "Jonas", "Josh", "Kiva", "Celeb", "Carlos", "Peter"];
+/*
+Keep the this part the same
+var class1 = [];
+var class2 = [];
+List needs to be enclosed in [] brackets and the line must end in a ; semicolon.
+
+Names enclosed with "" double quotes
+Names seperated with , commas
+*/
+
+var class1 = ["J1", "Alice", "Komal", "Chandler", "Eddie", "Alyza", "Jovanna", "Jonas", "Josh", "Kiva", "Celebrity", "Carlos", "Peter"];
 var class2 = ["Trinity", "Yejee", "Chloe", "Joycelin", "Michele", "Lauren"];
+
 var values = [];
 var buttonStates = [];
 var times = [];
