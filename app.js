@@ -15,8 +15,8 @@ Names enclosed with "" double quotes
 Names seperated with , commas
 */
 
-var class1 = ["J1", "Alice", "Komal", "Chandler", "Eddie", "Alyza", "Jovanna", "Jonas", "Josh", "Kiva", "Caleb", "Carlos", "Peter"];
-var class2 = ["Trinity", "Yejee", "Chloe", "Joycelin", "Michele", "Lauren"];
+var class1 = ["Horchata", "Evan", "Amber", "Chase", "Desmond", "Rean", "Zen", "Rashmi", "Abraham", "Abbey"];
+var class2 = ["Ben", "Helen Belete", "Minseo", "Toya", "Irene", "Ji Min", "Blessing", "Diane", "Liane", "Hannah", "BO WO", "Derick", "Joseph", "Suruchi", "Tuyet" ];
 
 var values = [];
 var buttonStates = [];
