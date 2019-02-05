@@ -16,7 +16,7 @@ Names seperated with , commas
 */
 
 var class1 = ["Horchata", "Evan", "Amber", "Chase", "Desmond", "Rean", "Zen", "Rashmi", "Abraham"];
-var class2 = ["Ben", "Helen Belete", "Minseo", "Troyah", "Irene", "Jace Min", "Blessing", "Diane", "Liane", "Ogidigben", "Bo-WO", "Derick", "Joseph", "Suruchi", "Tuyet"];
+var class2 = ["Ben", "Helen Belete", "Minseo", "Trohia", "Irene", "Jace Min", "Blessing", "Diane", "Liane", "Ogidigben", "Bo-WO", "Derick", "Joseph", "Suruchi", "Tuyet"];
 
 var values = [];
 var buttonStates = [];
