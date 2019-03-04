@@ -18,6 +18,15 @@ Names seperated with , commas
 var class1 = ["McKenzie", "Evan", "Montana", "Chase", "Rise Up", "Rean", "GPA", "Rashmi", "Abraham"];
 var class2 = ["Ben", "Helen Belete", "Minseo", "Trohia", "Irene", "Jace Min", "Blessing", "Jane", "Liane", "Ogidigben", "Bo-WO", "Derick", "Joseph", "Suruchi", "Tuyet"];
 
+var ouch1 = [];
+var ouch2 = [];
+for (var i = 0; i < class1.length; i++) {
+    ouch1.push(false);
+}
+for (var i = 0; i < class2.length; i++) {
+    ouch2.push(false);
+}
+
 var values = [];
 var buttonStates = [];
 var times = [];
@@ -79,6 +88,7 @@ io.sockets.on("connection", function(socket) {
     socket.emit("set_button_type", buttonStates);
     socket.emit("up", values);
     socket.emit("increment_time", times);
+    socket.emit("set_ouch", {ouch1, ouch2});
     
     socket.on("changeClass", function() {
         if (classNumber == 1) classNumber = 2;
@@ -133,9 +143,38 @@ io.sockets.on("connection", function(socket) {
     });
     
     socket.on("uncount", function(data) {
-        values[data]--;
+        if (values[data] > 0) values[data]--;
         for (var i = 0; i < socketList.length; i++) {
             socketList[i].emit("up", values);
+        }
+    });
+    
+    socket.on("ouch", function(data) {
+        if (data > class1.length - 1) {
+            var id = data - class1.length;
+            if (ouch2[id]) {
+                ouch2[id] = false;
+                for (var i = 0; i < socketList.length; i++) {
+                    socketList[i].emit("set_ouch", {ouch1, ouch2});
+                }
+            } else {
+                ouch2[id] = true;
+                for (var i = 0; i < socketList.length; i++) {
+                    socketList[i].emit("set_ouch", {ouch1, ouch2});
+                }
+            }
+        } else {
+            if (ouch1[data]) {
+                ouch1[data] = false;
+                for (var i = 0; i < socketList.length; i++) {
+                    socketList[i].emit("set_ouch", {ouch1, ouch2});
+                }
+            } else {
+                ouch1[data] = true;
+                for (var i = 0; i < socketList.length; i++) {
+                    socketList[i].emit("set_ouch", {ouch1, ouch2});
+                }
+            }
         }
     });
     
