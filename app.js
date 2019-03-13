@@ -16,7 +16,7 @@ Names seperated with , commas
 */
 
 var class1 = ["Mc Ken Z", "Duncan", "Run After", "Rise Up", "Rean", "The Buddhist", "Rah She Me", "Honest Abe"];
-var class2 = ["Ben", "Helen Belete", "Minseo", "Trohia", "Irene", "Jace Min", "Blessing", "Jane", "Liane", "Ogidigben", "Bo-WO", "Derick", "Joseph", "Suruchi", "Tuyet"];
+var class2 = ["Been", "Helen Belete", "Jimmy", "Trohia", "Ivanka", "Jace Min", "Curse", "Jane", "Liane", "Ogidigben", "Bo-WO", "The Rick", "Joseph", "Suruchi", "Tuyet"];
 
 var ouch1 = [];
 var ouch2 = [];
